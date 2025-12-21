@@ -1,0 +1,180 @@
+[
+  {
+    "id": 1,
+    "question": "What is the current meal reimbursement limit for employees?",
+    "expected_docs": ["travel_expenses_2024.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 2,
+    "question": "What was the meal reimbursement limit in 2023?",
+    "expected_docs": ["travel_expenses_2023.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 3,
+    "question": "Can contractors expense meals?",
+    "expected_docs": ["contractors.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 4,
+    "question": "How many PTO days do employees receive per year?",
+    "expected_docs": ["pto_policy.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 5,
+    "question": "Can unused PTO roll over to the next year?",
+    "expected_docs": ["pto_policy.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 6,
+    "question": "Is PTO unlimited at Prox Labs?",
+    "expected_docs": ["pto_policy.docx"],
+    "expected_behavior": "refute_with_citation"
+  },
+  {
+    "id": 7,
+    "question": "What steps are required to get production access?",
+    "expected_docs": ["access_control.docx", "onboarding.docx"],
+    "expected_behavior": "multi_doc_answer"
+  },
+  {
+    "id": 8,
+    "question": "Who must approve production write access?",
+    "expected_docs": ["access_control.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 9,
+    "question": "Are contractors allowed to have production access?",
+    "expected_docs": ["contractors.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 10,
+    "question": "What are the steps to deploy code to production?",
+    "expected_docs": ["deploy_process.docx"],
+    "expected_behavior": "structured_answer_with_citation"
+  },
+  {
+    "id": 11,
+    "question": "When are deployments allowed?",
+    "expected_docs": ["deploy_process.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 12,
+    "question": "What should be done if a production deployment causes issues?",
+    "expected_docs": ["deploy_process.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 13,
+    "question": "How quickly must on-call engineers respond to incidents?",
+    "expected_docs": ["on_call.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 14,
+    "question": "Can an engineer travel while on-call?",
+    "expected_docs": ["on_call.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 15,
+    "question": "What are the severity levels for incidents?",
+    "expected_docs": ["incident_response.docx"],
+    "expected_behavior": "structured_answer_with_citation"
+  },
+  {
+    "id": 16,
+    "question": "Which incident severities require a postmortem?",
+    "expected_docs": ["incident_response.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 17,
+    "question": "What is the escalation path for support issues?",
+    "expected_docs": ["escalation.docx"],
+    "expected_behavior": "structured_answer_with_citation"
+  },
+  {
+    "id": 18,
+    "question": "How fast should SEV1 support issues be addressed?",
+    "expected_docs": ["escalation.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 19,
+    "question": "What are common causes of login failures?",
+    "expected_docs": ["common_issues.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 20,
+    "question": "Does Prox Labs offer SSO?",
+    "expected_docs": ["faq.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 21,
+    "question": "Which pricing plans include API access?",
+    "expected_docs": ["faq.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 22,
+    "question": "What features are planned on the product roadmap?",
+    "expected_docs": ["roadmap.docx"],
+    "expected_behavior": "structured_answer_with_citation"
+  },
+  {
+    "id": 23,
+    "question": "Which plans include dedicated support and SLAs?",
+    "expected_docs": ["pricing.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 24,
+    "question": "Who are the roles in the engineering organization?",
+    "expected_docs": ["roles.docx"],
+    "expected_behavior": "structured_answer_with_citation"
+  },
+  {
+    "id": 25,
+    "question": "What onboarding steps must new employees complete?",
+    "expected_docs": ["onboarding.docx"],
+    "expected_behavior": "structured_answer_with_citation"
+  },
+  {
+    "id": 26,
+    "question": "Who is the dental insurance provider?",
+    "expected_behavior": "not_found"
+  },
+  {
+    "id": 27,
+    "question": "Is premium economy reimbursable for flights?",
+    "expected_docs": ["travel_expenses_2024.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 28,
+    "question": "What document discusses PTO trends in the industry?",
+    "expected_docs": ["misleading_doc.docx"],
+    "expected_behavior": "answer_with_citation"
+  },
+  {
+    "id": 29,
+    "question": "Does the PTO trends document define Prox Labs PTO policy?",
+    "expected_docs": ["misleading_doc.docx"],
+    "expected_behavior": "refute_with_citation"
+  },
+  {
+    "id": 30,
+    "question": "What is Prox Labs' policy on remote work?",
+    "expected_behavior": "not_found"
+  }
+]
