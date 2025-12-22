@@ -2,7 +2,7 @@ from langsmith import Client
 import json
 from pathlib import Path
 import pprint
-from main import query_assistant
+from src.agent.agent import query_assistant
 
 def answer_with_citation(result):
     return bool(result["answer"].strip()) and len(result["citations"]) > 0
@@ -25,7 +25,9 @@ def not_found(result):
         "couldn't find",
         "not found",
         "no information",
-        "not available"
+        "not available",
+        "do not contain",
+        "I don't"
     ]
     text = result["answer"].lower()
     return any(t in text for t in refusal_terms) and len(result["citations"]) == 0
