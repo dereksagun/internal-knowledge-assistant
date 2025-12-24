@@ -7,6 +7,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import ChatOllama
 from src.tools.parent_db import ParentDB
 from src.tools.ingest_docs import ingest_docs
+from langchain_openai import ChatOpenAI
 
 @dataclass
 class Deps:
@@ -23,9 +24,9 @@ def get_deps() -> Deps:
     embedding_function=embedder,
 
   )
-  llm = ChatOllama(
-    model="mistral",
-    validate_model_on_init=True
+  llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0.2,
   )
   parent_db = ParentDB()
 
