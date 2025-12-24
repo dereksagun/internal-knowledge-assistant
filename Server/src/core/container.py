@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import Any
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_ollama import ChatOllama
 from src.tools.parent_db import ParentDB
 from src.tools.ingest_docs import ingest_docs
 from langchain_openai import ChatOpenAI
@@ -13,7 +12,7 @@ from langchain_openai import ChatOpenAI
 class Deps:
     embedder: Any
     vector_store: Chroma
-    llm: ChatOllama
+    llm: ChatOpenAI
     parent_db: ParentDB
     
 @lru_cache(maxsize=1)
