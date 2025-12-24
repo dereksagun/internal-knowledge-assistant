@@ -3,7 +3,8 @@ import json
 from pathlib import Path
 from src.core.container import get_deps
 from src.services.agent_service import build_agent_service
-
+from dotenv import load_dotenv
+load_dotenv()
 deps = get_deps()
 handle_message = build_agent_service(deps)
 

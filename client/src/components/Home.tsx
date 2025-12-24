@@ -54,7 +54,7 @@ function Home({ onStart }: { onStart: () => void }) {
           <div className="mt-6 flex flex-wrap gap-2">
                 <Badge>Retrieval-Augmented Generation(RAG)</Badge>
                 <Badge>ChromaDb</Badge>
-                <Badge>Ollama LLM</Badge>
+                <Badge>Open AI</Badge>
                 <Badge>Langchain</Badge>
                 <Badge>Websockets</Badge>
               </div>
