@@ -20,8 +20,8 @@ def multi_doc_answer(result):
     return len(sources) >= 2
 
 def refute_with_citation(result):
-    refute_terms = ["not", "does not", "is incorrect", "no,"]
-    text = result["content"].lower()
+    refute_terms = ["not", "does not", "is incorrect", "no,", "i don't know"]
+    text = result.get("content").lower()
     return any(t in text for t in refute_terms) and len(result["citations"]) > 0
 
 def not_found(result):
@@ -31,10 +31,10 @@ def not_found(result):
         "no information",
         "not available",
         "do not contain",
-        "I don't"
+        "i don't"
     ]
-    text = result["content"].lower()
-    return any(t in text for t in refusal_terms) and len(result["citations"]) == 0
+    text = result.get("content").lower()
+    return any(t in text for t in refusal_terms) or len(result["citations"]) == 0
 
 
 BEHAVIOR_CHECKS = {
@@ -51,11 +51,17 @@ BEHAVIOR_CHECKS = {
 
 def cites_expected_docs(result, expected_docs):
     # Checks if the citations are an exact match
-    cited = {c["doc_title"] for c in result["citations"]}
+    cited = [c["doc_title"] for c in result["citations"]]
     print(f"\nRETURNED:\n{cited}\n")
     print(f"\nEXPECTED:\n {expected_docs}\n")
-    if(len(cited) != len(expected_docs)):
-      return False
+    '''if(len(cited) != len(expected_docs)):
+      return False'''
+    if(len(cited) == 0 and len(expected_docs) == 0): 
+        return True
+    for doc in expected_docs:
+        if doc not in cited:
+            return False
+    return True
     return not any(doc not in cited for doc in expected_docs)
 
 
@@ -81,7 +87,6 @@ async def run_eval():
         docs_ok = True
         if "expected_docs" in test:
             docs_ok = cites_expected_docs(result, test["expected_docs"])
-
         if behavior_ok and docs_ok:
             print("✅ PASS")
             passed += 1

@@ -11,11 +11,6 @@ def find_parent_docs(retrieved):
   for chunk, dist in retrieved:
     pid = chunk.metadata.get("parent_id")
     parents.setdefault(pid, []).append((chunk, dist))
-
-  '''for p in parents.items():
-    hits = p[1]
-    for h in hits:
-      print(f"Score: {h[1]} - DOC: {h[0].metadata.get("doc_title")}")'''
     
   return parents
 
@@ -28,7 +23,7 @@ def find_best_parent_scores(parents: dict[str, List[Tuple[Document, float]]]):
   scored.sort(key=lambda x: x[1])
   
   best = scored[0][1]
-  delta = 0.02
+  delta = 0.05
   max_parents = 2
 
   chosen = [(pid, score, hits) for pid, score, hits in scored 
