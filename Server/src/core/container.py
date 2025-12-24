@@ -29,10 +29,13 @@ def get_deps() -> Deps:
   )
   parent_db = ParentDB()
 
-  ingest_docs(
-    Path.cwd() / "docs",
-    parent_db=parent_db,
-    vector_store=vector_store
-  )
+  if(vector_store._collection.count() == 0):
+    ingest_docs(
+      Path.cwd() / "docs",
+      parent_db=parent_db,
+      vector_store=vector_store
+    )
+  
+  
 
   return Deps(embedder, vector_store, llm, parent_db)
