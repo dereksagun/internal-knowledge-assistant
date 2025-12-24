@@ -3,10 +3,11 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
 from src.tools.parent_db import ParentDB
 from src.tools.ingest_docs import ingest_docs
 from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
+
 
 @dataclass
 class Deps:
@@ -17,7 +18,7 @@ class Deps:
     
 @lru_cache(maxsize=1)
 def get_deps() -> Deps:
-  embedder = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+  embedder = OpenAIEmbeddings(model="text-embedding-3-small")
   vector_store = Chroma(
     collection_name="InternalCompanyVectorDB",
     embedding_function=embedder,
