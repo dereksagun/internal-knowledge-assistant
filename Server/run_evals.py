@@ -1,14 +1,17 @@
-from langsmith import Client
+import asyncio
 import json
 from pathlib import Path
-import pprint
-from src.agent.agent import query_assistant
+from src.core.container import get_deps
+from src.services.agent_service import build_agent_service
+
+deps = get_deps()
+handle_message = build_agent_service(deps)
 
 def answer_with_citation(result):
-    return bool(result["answer"].strip()) and len(result["citations"]) > 0
+    return bool(result["content"].strip()) and len(result["citations"]) > 0
 
 def structured_answer_with_citation(result):
-    structured = any(x in result["answer"] for x in ["\n-", "\n1.", "\n•"])
+    structured = any(x in result["content"] for x in ["\n-", "\n1.", "\n•"])
     return structured and len(result["citations"]) > 0
 
 def multi_doc_answer(result):
@@ -17,7 +20,7 @@ def multi_doc_answer(result):
 
 def refute_with_citation(result):
     refute_terms = ["not", "does not", "is incorrect", "no,"]
-    text = result["answer"].lower()
+    text = result["content"].lower()
     return any(t in text for t in refute_terms) and len(result["citations"]) > 0
 
 def not_found(result):
@@ -29,7 +32,7 @@ def not_found(result):
         "do not contain",
         "I don't"
     ]
-    text = result["answer"].lower()
+    text = result["content"].lower()
     return any(t in text for t in refusal_terms) and len(result["citations"]) == 0
 
 
@@ -60,7 +63,7 @@ def cites_expected_docs(result, expected_docs):
 # Eval runner
 # -------------------------
 
-def run_eval():
+async def run_eval():
     with open(Path.cwd() / "evals.json", "r") as file:
       tests = json.load(file)
 
@@ -69,7 +72,7 @@ def run_eval():
 
     for test in tests:
         print(f"\nQ{test['id']}: {test['question']}")
-        result = query_assistant(test["question"])
+        result = await handle_message(test["question"])
 
         behavior = test["expected_behavior"]
         behavior_ok = BEHAVIOR_CHECKS[behavior](result)
@@ -101,7 +104,7 @@ def run_eval():
             print(f"- Q{f['id']}: {f['question']}")
 
 if __name__ == "__main__":
-    run_eval()
+    asyncio.run(run_eval())
 '''9) Basic eval harness (small but powerful)
 
 Feature

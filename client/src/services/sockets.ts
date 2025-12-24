@@ -1,21 +1,18 @@
 import type { ServerMessage, WSHandlers } from '../types'
 
-const WS_URL = "ws://127.0.0.1:8000/ws"
 
 export const createWebSocket = (handlers: WSHandlers) => {
-  const ws = new WebSocket(WS_URL);
+  const ws = new WebSocket(import.meta.env.VITE_WS_URL);
 
   ws.onopen = () => {
     console.log("WS connected");
     handlers.onOpen();
   };
 
-  ws.onerror = (err) => {
-    console.error("WS error:", err);
+  ws.onerror = () => {
   };
   
   ws.onclose = () => {
-    console.log("WS disconnected");
     handlers.onClose()
   };
 
