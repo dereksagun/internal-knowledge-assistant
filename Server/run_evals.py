@@ -87,6 +87,7 @@ async def run_eval():
         docs_ok = True
         if "expected_docs" in test:
             docs_ok = cites_expected_docs(result, test["expected_docs"])
+        #print(f"{result.get("content")}")
         if behavior_ok and docs_ok:
             print("✅ PASS")
             passed += 1

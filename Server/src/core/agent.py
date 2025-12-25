@@ -41,23 +41,3 @@ def create_new_agent(deps: Deps):
   agent = create_agent(deps.llm, tools=[], middleware=[RetrieveDocumentsMiddleware()])
   return agent
       
-
-'''
-def group_by_parents(child_hits: List[Document]) -> dict:
-  output = {} 
-  for child in child_hits:
-    parent_id = child.metadata.get("parent_id")
-    if output.get(parent_id) is None:
-      output[parent_id] = [child]
-    else:
-      output.get(parent_id).append(child)
-  return output
-
-print(f"PULLED:\n")
-for d, s in retrieved:
-  print(f"\nScore: {s} - Document: {d.metadata.get("doc_title")}")
-
-print(f"Filtered completed:\n:")
-for pid, score, hits in chosen:
-  print(f"\nScore: {score}")
-'''

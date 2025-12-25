@@ -5,7 +5,7 @@ langchain==1.2.0
 langchain-openai>=0.1.0
 langchain-community==0.4.1
 langchain-core==1.2.2
-langchain_chroma
+langchain-chroma
 langchain-text-splitters==1.1.0
 pydantic==2.12.5
 python-dotenv==1.2.1
