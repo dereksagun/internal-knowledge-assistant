@@ -3,11 +3,15 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 from langchain_chroma import Chroma
+from pydantic import BaseModel, Field
 from src.tools.parent_db import ParentDB
 from src.tools.ingest_docs import ingest_docs
 from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 
+class RagResponse(BaseModel):
+     answer: str = Field()
+     answer_found: bool = Field()
 
 @dataclass
 class Deps:

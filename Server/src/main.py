@@ -13,6 +13,14 @@ async def echo(websocket):
     async for message in websocket:
         await websocket.send(message)
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
+@app.get("/health")
+def health():
+    return {"ok": True}
+
 @app.websocket("/chat")
 async def websocket_endpoint(websocket: WebSocket):
   await websocket.accept()

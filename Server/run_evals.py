@@ -12,7 +12,7 @@ def answer_with_citation(result):
     return bool(result["content"].strip()) and len(result["citations"]) > 0
 
 def structured_answer_with_citation(result):
-    structured = any(x in result["content"] for x in ["\n-", "\n1.", "\n•"])
+    structured = any(x in result["content"] for x in ["\n-", "\n1.", "\n•", "1."])
     return structured and len(result["citations"]) > 0
 
 def multi_doc_answer(result):

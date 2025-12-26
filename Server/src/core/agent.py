@@ -5,8 +5,14 @@ from src.utils.reranker import find_parent_docs, get_parent_ids, find_best_paren
 from src.utils.citations import build_citations
 from langchain.agents import create_agent
 from src.core.container import Deps
+from pydantic import BaseModel, Field
 
 def create_new_agent(deps: Deps):
+  class RagResponse(BaseModel):
+     answer: str = Field()
+     answer_found: bool = Field()
+
+     
   class State(AgentState):
     citations: Any
 
@@ -27,17 +33,18 @@ def create_new_agent(deps: Deps):
 
         augmented_message_content = (
           f"{last_message.text}\n\n"
-          "You are a helpful assistant trying to help me understand my companies internal documents. \n"
-          "Use the ONLY following context in your response. If you do not know, say you don't know. No guessing allowed.\n\n"
+          "You MUST answer using only the provided CONTEXT.\n"
+          "If the answer is not explicitly stated in the CONTEXT, set answer_found=false and set answer to \"I don't know.\"\n"
+          "If you set answer_found=true, you must be confident the answer is stated in the CONTEXT.\n\n"
           f"CONTEXT:\n{docs_content}"
         )
         citations = build_citations(chosen, deps)
-      
+        
         return {
             "messages": [last_message.model_copy(update={"content": augmented_message_content})],
             "citations": citations
 
         }
-  agent = create_agent(deps.llm, tools=[], middleware=[RetrieveDocumentsMiddleware()])
+  agent = create_agent(deps.llm, tools=[], middleware=[RetrieveDocumentsMiddleware()], response_format=RagResponse)
   return agent
       
