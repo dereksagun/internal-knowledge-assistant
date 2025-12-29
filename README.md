@@ -2,6 +2,9 @@ Internal Knowledge Assistant
 
 An internal knowledge assistant that lets users ask questions about company documents and receive source-grounded answers using a Retrieval-Augmented Generation (RAG) pipeline. If the answer cannot be found in the documents, the system explicitly responds with “I don’t know.”
 
+<img width="1500" height="820" alt="Screenshot 2025-12-28 at 9 18 48 PM" src="https://github.com/user-attachments/assets/5de140c2-f1f5-475c-a89b-7afdf0360f6c" />
+<img width="1496" height="819" alt="Screenshot 2025-12-28 at 9 15 11 PM" src="https://github.com/user-attachments/assets/ad5a59bb-d897-4712-9bc0-327dc274cd26" />
+
 ⸻
 
 How It Works
